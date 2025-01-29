@@ -25,9 +25,21 @@ export const createUsers = async (users: Prisma.UserCreateInput[]) => {
 export const getAllUsers = async () => {
     const users = await prisma.user.findMany({
         where: {
-            email: {
-                startsWith: "teste"
-            }
+            OR: [
+                {
+                    email: {
+                        endsWith: '@hotmail.com'
+                    }
+                },
+                {
+                    email: {
+                        endsWith: '@gmail.com'
+                    }, 
+                    name: {
+                        startsWith: 'João'
+                    }
+                }
+            ]
         },
         select: {
             id: true,
