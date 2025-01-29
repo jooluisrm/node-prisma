@@ -9,9 +9,13 @@ mainRouter.get('/ping', (req, res) => {
 
 mainRouter.post("/user", async (req, res) => {
     const user = await createUser({
-        name: "Pedro",
-        email: "pedro@gmail.com"
+        name: "Maria",
+        email: "maria@gmail.com"
     });
+    if (user) {
+        res.status(201).json({ user });
+    } else {
+        res.status(500).json({ error: "E-mail já cadastrado" })
+    }
 
-    res.json({ user });
 })

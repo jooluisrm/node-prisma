@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { prisma } from "../libs/prisma"
 
 type CreateUserProps = {
@@ -6,8 +7,12 @@ type CreateUserProps = {
 }
 
 export const createUser = async ({ name, email }: CreateUserProps) => {
-    const user = await prisma.user.create({
-        data: { name, email }
-    });
-    return user;
+    try {
+        const user = await prisma.user.create({
+            data: { name, email }
+        });
+        return user;
+    } catch (error) {
+        return false;
+    }
 }
