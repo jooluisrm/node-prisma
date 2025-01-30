@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUser, createUsers, getAllUsers, getUserByEmail } from '../services/user';
+import { createUser, createUsers, getAllUsers, getUserByEmail, updateUser } from '../services/user';
 
 export const mainRouter = Router();
 
@@ -9,8 +9,8 @@ mainRouter.get('/ping', (req, res) => {
 
 mainRouter.post("/user", async (req, res) => {
     const user = await createUser({
-        name: "Teste10",
-        email: "teste10@gmail.com",
+        name: "Teste50",
+        email: "teste10@hotmail.com",
         posts: {
             create: {
                 title: 'Titulo de teste',
@@ -44,5 +44,10 @@ mainRouter.get("/users", async (req, res) => {
 
 mainRouter.get("/user", async (req, res) => {
     const result = await getUserByEmail('joao@gmail.com');
-    res.json({result});
+    res.json({ result });
+});
+
+mainRouter.put("/user", async (req, res) => {
+    const result = await updateUser();
+    res.json({ result });
 })

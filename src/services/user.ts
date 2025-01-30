@@ -24,11 +24,7 @@ export const createUsers = async (users: Prisma.UserCreateInput[]) => {
 
 export const getAllUsers = async () => {
 
-    let page = 5;
-    const users = await prisma.user.findMany({
-        skip: (page - 1) * 2,
-        take: 2
-    });
+    const users = await prisma.user.findMany({});
     return users;
 }
 
@@ -41,4 +37,13 @@ export const getUserByEmail = async (email: string) => {
         }
     });
     return user;
+}
+
+export const updateUser = async () => {
+    const updatedUser = await prisma.user.updateMany({
+        data: {
+            status: true
+        }
+    });
+    return updatedUser;
 }
