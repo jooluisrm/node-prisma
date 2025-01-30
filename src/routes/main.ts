@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUser, createUsers, getAllUsers, getUserByEmail, updateUser } from '../services/user';
+import { createUser, createUsers, deleteUser, getAllUsers, getUserByEmail, updateUser } from '../services/user';
 
 export const mainRouter = Router();
 
@@ -19,11 +19,6 @@ mainRouter.post("/user", async (req, res) => {
         }
     });
 
-    if (user) {
-        res.status(201).json({ user });
-    } else {
-        res.status(500).json({ error: "E-mail já cadastrado" });
-    }
 });
 
 mainRouter.post("/users", async (req, res) => {

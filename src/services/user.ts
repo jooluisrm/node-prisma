@@ -3,11 +3,13 @@ import { prisma } from "../libs/prisma";
 
 
 export const createUser = async (data: Prisma.UserCreateInput) => {
-    try {
-        return await prisma.user.create({ data });
-    } catch (error) {
-        return false;
-    }
+    const result = await prisma.user.upsert({
+        where: {
+            email: data.email
+        },
+        update: {},
+        create: data
+    })
 }
 
 export const createUsers = async (users: Prisma.UserCreateInput[]) => {
@@ -46,4 +48,13 @@ export const updateUser = async () => {
         }
     });
     return updatedUser;
+}
+
+export const deleteUser = async () => {
+    const deleteUser = await prisma.user.delete({
+        where: {
+            email: "teste10@hotmail.com"
+        }
+    });
+    return deleteUser;
 }
